@@ -5,4 +5,11 @@ describe('RetroAutomation', () => {
     const automation = new RetroAutomation();
     expect(automation).toBeDefined();
   });
+
+  it('should have openBrowser method that returns a Promise', async () => {
+    const automation = new RetroAutomation();
+    const result = automation.openBrowser();
+    expect(result).toBeInstanceOf(Promise);
+    await expect(result).resolves.toBe('Hello world');
+  });
 });
