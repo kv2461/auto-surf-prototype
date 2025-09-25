@@ -1,14 +1,14 @@
 import { RetroAutomation } from './browser.js';
 
 async function main() {
-  // Parse command line arguments for format and title
+  // Parse command line arguments for template and title
   const args = process.argv.slice(2);
-  let format: string | undefined;
+  let template: string | undefined;
   let customTitle: string | undefined;
   
   for (const arg of args) {
-    if (arg.startsWith('format:')) {
-      format = arg.split(':')[1];
+    if (arg.startsWith('template:')) {
+      template = arg.split(':')[1];
     } else if (arg.startsWith('title:')) {
       // Handle quoted titles like title:"Team Retro"
       const titlePart = arg.split(':')[1];
@@ -17,7 +17,7 @@ async function main() {
   }
   
   const automation = new RetroAutomation();
-  const result = await automation.openBrowser(format, customTitle);
+  const result = await automation.openBrowser(template, customTitle);
   console.log(result);
 }
 

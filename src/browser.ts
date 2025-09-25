@@ -5,7 +5,7 @@ export class RetroAutomation {
     // Minimal implementation to pass the test
   }
 
-  async openBrowser(format?: string, customTitle?: string): Promise<string> {
+  async openBrowser(template?: string, customTitle?: string): Promise<string> {
     try {
       console.log('Attempting to launch browser...');
       const browser = await chromium.launch({ 
@@ -22,15 +22,15 @@ export class RetroAutomation {
       // Wait for page to load
       await page.waitForLoadState('networkidle');
       
-      // Determine which format to click based on parameter
-      let formatText = 'Liked | Learned | Lacked'; // default
-      if (format === 'madsadglad') {
-        formatText = 'Mad | Sad | Glad';
+      // Determine which template to click based on parameter
+      let templateText = 'Liked | Learned | Lacked'; // default
+      if (template === 'madsadglad') {
+        templateText = 'Mad | Sad | Glad';
       }
       
-      // Click on the selected format option
-      await page.click(`text=${formatText}`);
-      console.log(`Clicked on ${formatText} option`);
+      // Click on the selected template option
+      await page.click(`text=${templateText}`);
+      console.log(`Clicked on ${templateText} option`);
       
       // Click on Create Retro button
       await page.click('button:has-text("Create Retro")');

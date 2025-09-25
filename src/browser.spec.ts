@@ -96,7 +96,7 @@ describe('RetroAutomation', () => {
     expect(mockPage.click).toHaveBeenCalledWith('button:has-text("Create Retro")');
   });
 
-  it('should click on Mad | Sad | Glad box when format is madsadglad', async () => {
+  it('should click on Mad | Sad | Glad box when template is madsadglad', async () => {
     const automation = new RetroAutomation();
     await automation.openBrowser('madsadglad');
     
@@ -142,15 +142,15 @@ describe('RetroAutomation', () => {
     expect(mockPage.keyboard.type).toHaveBeenCalledWith(`Team Retro ${today}`);
   });
 
-  it('should use both custom format and title when both parameters are provided', async () => {
+  it('should use both custom template and title when both parameters are provided', async () => {
     const automation = new RetroAutomation();
     await automation.openBrowser('madsadglad', 'Team Retro');
     
-    // Get the mock page instance to verify both format and title
+    // Get the mock page instance to verify both template and title
     const mockBrowser = await mockChromium.launch();
     const mockPage = await mockBrowser.newPage();
     
-    // Should click on Mad | Sad | Glad format
+    // Should click on Mad | Sad | Glad template
     expect(mockPage.click).toHaveBeenCalledWith('text=Mad | Sad | Glad');
     
     // Should type custom title with date
