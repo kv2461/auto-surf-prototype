@@ -6,7 +6,9 @@ jest.mock('playwright', () => ({
     launch: jest.fn().mockResolvedValue({
       newPage: jest.fn().mockResolvedValue({
         goto: jest.fn().mockResolvedValue(undefined),
-        url: jest.fn().mockReturnValue('https://retrotool.io/new-retrospective')
+        url: jest.fn().mockReturnValue('https://retrotool.io/new-retrospective'),
+        click: jest.fn().mockResolvedValue(undefined),
+        waitForLoadState: jest.fn().mockResolvedValue(undefined)
       }),
       close: jest.fn().mockResolvedValue(undefined)
     })
@@ -75,5 +77,17 @@ describe('RetroAutomation', () => {
     const automation = new RetroAutomation();
     const result = await automation.openBrowser();
     expect(result).toContain('https://retrotool.io/new-retrospective');
+  });
+
+  it('should click on Liked | Learned | Lacked box and Create Retro button', async () => {
+    const automation = new RetroAutomation();
+    await automation.openBrowser();
+    
+    // Get the mock page instance to verify clicks were made
+    const mockBrowser = await mockChromium.launch();
+    const mockPage = await mockBrowser.newPage();
+    expect(mockPage.waitForLoadState).toHaveBeenCalledWith('networkidle');
+    expect(mockPage.click).toHaveBeenCalledWith('text=Liked | Learned | Lacked');
+    expect(mockPage.click).toHaveBeenCalledWith('button:has-text("Create Retro")');
   });
 });

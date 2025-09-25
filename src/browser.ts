@@ -19,6 +19,17 @@ export class RetroAutomation {
       await page.goto('https://retrotool.io/new-retrospective');
       console.log('Navigated to retrotool.io/new-retrospective');
       
+      // Wait for page to load
+      await page.waitForLoadState('networkidle');
+      
+      // Click on the Liked | Learned | Lacked label/option
+      await page.click('text=Liked | Learned | Lacked');
+      console.log('Clicked on Liked | Learned | Lacked option');
+      
+      // Click on Create Retro button
+      await page.click('button:has-text("Create Retro")');
+      console.log('Clicked Create Retro button');
+      
       // Keep browser open for 5 seconds so you can see it
       await new Promise(resolve => setTimeout(resolve, 5000));
       
