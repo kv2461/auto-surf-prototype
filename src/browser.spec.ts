@@ -5,7 +5,8 @@ jest.mock('playwright', () => ({
   chromium: {
     launch: jest.fn().mockResolvedValue({
       newPage: jest.fn().mockResolvedValue({
-        goto: jest.fn().mockResolvedValue(undefined)
+        goto: jest.fn().mockResolvedValue(undefined),
+        url: jest.fn().mockReturnValue('https://retrotool.io')
       }),
       close: jest.fn().mockResolvedValue(undefined)
     })
@@ -68,5 +69,11 @@ describe('RetroAutomation', () => {
     const mockBrowser = await mockChromium.launch();
     const mockPage = await mockBrowser.newPage();
     expect(mockPage.goto).toHaveBeenCalledWith('https://retrotool.io');
+  });
+
+  it('should return the URL of the last website visited before closing', async () => {
+    const automation = new RetroAutomation();
+    const result = await automation.openBrowser();
+    expect(result).toContain('https://retrotool.io');
   });
 });

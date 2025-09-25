@@ -21,7 +21,7 @@ describe('CLI', () => {
     try {
       const { execSync } = require('child_process');
       const output = execSync('npm run create-retro', { encoding: 'utf-8' });
-      expect(output).toContain('From RetroAutomation class');
+      expect(output).toContain('Starting script... Browser launched. Last visited: https://retrotool.io/');
     } finally {
       // Restore original file
       fs.writeFileSync('src/browser.ts', originalBrowser);

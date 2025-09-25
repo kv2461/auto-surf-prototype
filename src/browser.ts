@@ -23,8 +23,9 @@ export class RetroAutomation {
       await new Promise(resolve => setTimeout(resolve, 5000));
       
       console.log('Closing browser...');
+      const currentUrl = page.url();
       await browser.close();
-      return 'Starting script... Browser launched';
+      return `Starting script... Browser launched. Last visited: ${currentUrl}`;
     } catch (error) {
       console.error('Failed to launch browser:', error);
       throw error;
