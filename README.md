@@ -8,14 +8,20 @@ A command-line tool that automates the creation of retrospectives on retrotool.i
 # Install dependencies
 npm install
 
-# Install browser binaries
-npm run playwright:install
+# Install browser binaries (Playwright)
+npx playwright install
 
-# Run the tool
-npm run dev
+# Run the tool (default: Liked | Learned | Lacked template)
+npm run create-retro
 
-# Run with options
-npm run dev -- --title "Sprint 15 Retro" --no-date --format mad-sad-glad
+# Run with custom title
+npm run create-retro title:"Team Sprint Retro"
+
+# Run with different template
+npm run create-retro template:madsadglad
+
+# Run with both custom title and template
+npm run create-retro title:"Copacetic Retro" template:madsadglad
 
 # Run tests
 npm test
@@ -25,25 +31,40 @@ npm test
 
 | Command | Description |
 |---------|-------------|
-| `npm run dev` | Run the tool in development mode |
+| `npm run create-retro` | Create a retrospective with default settings |
 | `npm test` | Run test suite with Jest |
-| `npm run test:watch` | Run tests in watch mode |
-| `npm run test:coverage` | Run tests with coverage report |
 | `npm run build` | Compile TypeScript |
-| `npm run lint` | Check code style |
 
-## CLI Options
+## CLI Arguments
 
-- `--title` / `-t`: Custom retro title (default: "Team Retro")
-- `--no-date`: Exclude current date from title (default: date included as YYYY-MM-DD)
-- `--format` / `-f`: Retro format (default: "liked-learned-lacked")
+- `title:"Custom Title"`: Sets custom retro title (default: "Retro")
+- `template:madsadglad`: Uses Mad | Sad | Glad template instead of default
 
-## Supported Formats
+**Note**: Date is automatically appended in YYYY-MM-DD format (e.g., "Retro 2025-09-24")
 
-- `liked-learned-lacked` (default): What we liked, learned, and lacked
-- `mad-sad-glad`: What made us mad, sad, and glad  
-- `start-stop-continue`: What to start, stop, and continue
-- `plus-delta`: What went well (+) and what to change (Δ)
+## Supported Templates
+
+- **Default**: Liked | Learned | Lacked
+- `madsadglad`: Mad | Sad | Glad
+
+## Examples
+
+```bash
+# Default retrospective (Liked | Learned | Lacked, title "Retro 2025-09-24")
+npm run create-retro
+
+# Custom title with default template
+npm run create-retro title:"Sprint Review"
+# Result: "Sprint Review 2025-09-24" with Liked | Learned | Lacked
+
+# Mad | Sad | Glad template with default title
+npm run create-retro template:madsadglad  
+# Result: "Retro 2025-09-24" with Mad | Sad | Glad
+
+# Both custom title and template
+npm run create-retro title:"Team Retro" template:madsadglad
+# Result: "Team Retro 2025-09-24" with Mad | Sad | Glad
+```
 
 ## Development Approach
 
