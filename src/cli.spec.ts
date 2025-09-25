@@ -13,8 +13,8 @@ describe('CLI', () => {
     // Temporarily modify browser.ts to return different value
     const originalBrowser = fs.readFileSync('src/browser.ts', 'utf-8');
     const modifiedBrowser = originalBrowser.replace(
-      "Promise.resolve('Starting script...')", 
-      "Promise.resolve('From RetroAutomation class')"
+      "return 'Starting script... Browser launched';", 
+      "return 'From RetroAutomation class';"
     );
     fs.writeFileSync('src/browser.ts', modifiedBrowser);
     
