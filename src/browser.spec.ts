@@ -59,4 +59,14 @@ describe('RetroAutomation', () => {
       slowMo: 1000 
     });
   });
+
+  it('should navigate to retrotool.io after opening browser', async () => {
+    const automation = new RetroAutomation();
+    await automation.openBrowser();
+    
+    // Get the mock page instance to verify goto was called with retrotool.io
+    const mockBrowser = await mockChromium.launch();
+    const mockPage = await mockBrowser.newPage();
+    expect(mockPage.goto).toHaveBeenCalledWith('https://retrotool.io');
+  });
 });

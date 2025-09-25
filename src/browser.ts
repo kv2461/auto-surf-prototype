@@ -16,8 +16,8 @@ export class RetroAutomation {
       
       // Create a page and navigate to a website so you can see something
       const page = await browser.newPage();
-      await page.goto('https://example.com');
-      console.log('Navigated to example.com');
+      await page.goto('https://retrotool.io');
+      console.log('Navigated to retrotool.io');
       
       // Keep browser open for 5 seconds so you can see it
       await new Promise(resolve => setTimeout(resolve, 5000));
