@@ -22,9 +22,6 @@ prototype/
 │   ├── browser.ts         # Browser automation logic
 │   ├── navigation.ts      # Site navigation handlers
 │   └── types.ts           # Type definitions
-├── tests/
-│   ├── setup.ts           # Jest global setup
-│   └── *.test.ts          # Unit tests
 └── docs/
     ├── ARCHITECTURE.md    # This file
     ├── DEVELOPMENT.md     # Development guide
