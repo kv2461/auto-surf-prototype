@@ -90,4 +90,16 @@ describe('RetroAutomation', () => {
     expect(mockPage.click).toHaveBeenCalledWith('text=Liked | Learned | Lacked');
     expect(mockPage.click).toHaveBeenCalledWith('button:has-text("Create Retro")');
   });
+
+  it('should click on Mad | Sad | Glad box when format is madsadglad', async () => {
+    const automation = new RetroAutomation();
+    await automation.openBrowser('madsadglad');
+    
+    // Get the mock page instance to verify clicks were made
+    const mockBrowser = await mockChromium.launch();
+    const mockPage = await mockBrowser.newPage();
+    expect(mockPage.waitForLoadState).toHaveBeenCalledWith('networkidle');
+    expect(mockPage.click).toHaveBeenCalledWith('text=Mad | Sad | Glad');
+    expect(mockPage.click).toHaveBeenCalledWith('button:has-text("Create Retro")');
+  });
 });

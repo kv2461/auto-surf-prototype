@@ -5,7 +5,7 @@ export class RetroAutomation {
     // Minimal implementation to pass the test
   }
 
-  async openBrowser(): Promise<string> {
+  async openBrowser(format?: string): Promise<string> {
     try {
       console.log('Attempting to launch browser...');
       const browser = await chromium.launch({ 
@@ -22,9 +22,15 @@ export class RetroAutomation {
       // Wait for page to load
       await page.waitForLoadState('networkidle');
       
-      // Click on the Liked | Learned | Lacked label/option
-      await page.click('text=Liked | Learned | Lacked');
-      console.log('Clicked on Liked | Learned | Lacked option');
+      // Determine which format to click based on parameter
+      let formatText = 'Liked | Learned | Lacked'; // default
+      if (format === 'madsadglad') {
+        formatText = 'Mad | Sad | Glad';
+      }
+      
+      // Click on the selected format option
+      await page.click(`text=${formatText}`);
+      console.log(`Clicked on ${formatText} option`);
       
       // Click on Create Retro button
       await page.click('button:has-text("Create Retro")');
