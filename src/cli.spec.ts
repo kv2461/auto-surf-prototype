@@ -1,8 +1,30 @@
 describe('CLI', () => {
   it('should call openBrowser when script is run', async () => {
-    // This will fail because we don't have a CLI script yet
     const { execSync } = require('child_process');
     const output = execSync('npm run dev', { encoding: 'utf-8' });
     expect(output).toContain('Hello world');
+  });
+
+  it('should output result from RetroAutomation openBrowser method', async () => {
+    // First, change what openBrowser returns to something unique
+    // If CLI is actually calling the method, output should change
+    const fs = require('fs');
+    
+    // Temporarily modify browser.ts to return different value
+    const originalBrowser = fs.readFileSync('src/browser.ts', 'utf-8');
+    const modifiedBrowser = originalBrowser.replace(
+      "Promise.resolve('Hello world')", 
+      "Promise.resolve('From RetroAutomation class')"
+    );
+    fs.writeFileSync('src/browser.ts', modifiedBrowser);
+    
+    try {
+      const { execSync } = require('child_process');
+      const output = execSync('npm run dev', { encoding: 'utf-8' });
+      expect(output).toContain('From RetroAutomation class');
+    } finally {
+      // Restore original file
+      fs.writeFileSync('src/browser.ts', originalBrowser);
+    }
   });
 });
