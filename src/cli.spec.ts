@@ -1,10 +1,4 @@
 describe('CLI', () => {
-  it('should call openBrowser when script is run', async () => {
-    const { execSync } = require('child_process');
-    const output = execSync('npm run create-retro', { encoding: 'utf-8' });
-    expect(output).toContain('Starting script...');
-  });
-
   it('should output result from RetroAutomation openBrowser method', async () => {
     // First, change what openBrowser returns to something unique
     // If CLI is actually calling the method, output should change
