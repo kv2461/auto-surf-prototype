@@ -36,6 +36,22 @@ export class RetroAutomation {
       await page.click('button:has-text("Create Retro")');
       console.log('Clicked Create Retro button');
       
+      // Wait for navigation to the new retrospective page
+      await page.waitForLoadState('networkidle');
+      
+      // Edit the title to include current date
+      const today = new Date().toISOString().split('T')[0]; // yyyy-mm-dd format
+      const newTitle = `Retro ${today}`;
+      
+      // Click on the "Untitled retrospective" button to edit title
+      await page.click('button[data-cy="value"]:has-text("Untitled retrospective")');
+      console.log('Clicked on title to edit');
+      
+      // Clear existing text and type the new title
+      await page.keyboard.press('Control+A'); // Select all
+      await page.keyboard.type(newTitle);
+      console.log(`Set title to: ${newTitle}`);
+      
       // Keep browser open for 5 seconds so you can see it
       await new Promise(resolve => setTimeout(resolve, 5000));
       

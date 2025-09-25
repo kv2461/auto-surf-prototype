@@ -8,7 +8,12 @@ jest.mock('playwright', () => ({
         goto: jest.fn().mockResolvedValue(undefined),
         url: jest.fn().mockReturnValue('https://retrotool.io/new-retrospective'),
         click: jest.fn().mockResolvedValue(undefined),
-        waitForLoadState: jest.fn().mockResolvedValue(undefined)
+        waitForLoadState: jest.fn().mockResolvedValue(undefined),
+        fill: jest.fn().mockResolvedValue(undefined),
+        keyboard: {
+          press: jest.fn().mockResolvedValue(undefined),
+          type: jest.fn().mockResolvedValue(undefined)
+        }
       }),
       close: jest.fn().mockResolvedValue(undefined)
     })
@@ -101,5 +106,22 @@ describe('RetroAutomation', () => {
     expect(mockPage.waitForLoadState).toHaveBeenCalledWith('networkidle');
     expect(mockPage.click).toHaveBeenCalledWith('text=Mad | Sad | Glad');
     expect(mockPage.click).toHaveBeenCalledWith('button:has-text("Create Retro")');
+  });
+
+  it('should edit the title to include current date after creating retrospective', async () => {
+    const automation = new RetroAutomation();
+    await automation.openBrowser();
+    
+    // Get the mock page instance to verify title editing
+    const mockBrowser = await mockChromium.launch();
+    const mockPage = await mockBrowser.newPage();
+    
+    // Should click on the "Untitled retrospective" button with data-cy="value"
+    expect(mockPage.click).toHaveBeenCalledWith('button[data-cy="value"]:has-text("Untitled retrospective")');
+    
+    // Should select all text and type the new title
+    expect(mockPage.keyboard.press).toHaveBeenCalledWith('Control+A');
+    const today = new Date().toISOString().split('T')[0]; // yyyy-mm-dd format
+    expect(mockPage.keyboard.type).toHaveBeenCalledWith(`Retro ${today}`);
   });
 });
