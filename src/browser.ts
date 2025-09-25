@@ -40,7 +40,8 @@ export class RetroAutomation {
       await page.waitForLoadState('networkidle');
       
       // Edit the title to include current date
-      const today = new Date().toISOString().split('T')[0]; // yyyy-mm-dd format
+      const now = new Date();
+      const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`; // yyyy-mm-dd format in local time
       const baseTitle = customTitle || 'Retro';
       const newTitle = `${baseTitle} ${today}`;
       

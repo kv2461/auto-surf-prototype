@@ -121,7 +121,8 @@ describe('RetroAutomation', () => {
     
     // Should select all text and type the new title
     expect(mockPage.keyboard.press).toHaveBeenCalledWith('Control+A');
-    const today = new Date().toISOString().split('T')[0]; // yyyy-mm-dd format
+    const now = new Date();
+    const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
     expect(mockPage.keyboard.type).toHaveBeenCalledWith(`Retro ${today}`);
   });
 
@@ -138,7 +139,8 @@ describe('RetroAutomation', () => {
     
     // Should type custom title with date
     expect(mockPage.keyboard.press).toHaveBeenCalledWith('Control+A');
-    const today = new Date().toISOString().split('T')[0]; // yyyy-mm-dd format
+    const now = new Date();
+    const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
     expect(mockPage.keyboard.type).toHaveBeenCalledWith(`Team Retro ${today}`);
   });
 
@@ -154,7 +156,8 @@ describe('RetroAutomation', () => {
     expect(mockPage.click).toHaveBeenCalledWith('text=Mad | Sad | Glad');
     
     // Should type custom title with date
-    const today = new Date().toISOString().split('T')[0]; // yyyy-mm-dd format
+    const now = new Date();
+    const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
     expect(mockPage.keyboard.type).toHaveBeenCalledWith(`Team Retro ${today}`);
   });
 });
