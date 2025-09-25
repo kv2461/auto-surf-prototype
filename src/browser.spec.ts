@@ -124,4 +124,37 @@ describe('RetroAutomation', () => {
     const today = new Date().toISOString().split('T')[0]; // yyyy-mm-dd format
     expect(mockPage.keyboard.type).toHaveBeenCalledWith(`Retro ${today}`);
   });
+
+  it('should use custom title when title parameter is provided', async () => {
+    const automation = new RetroAutomation();
+    await automation.openBrowser(undefined, 'Team Retro');
+    
+    // Get the mock page instance to verify custom title
+    const mockBrowser = await mockChromium.launch();
+    const mockPage = await mockBrowser.newPage();
+    
+    // Should click on the "Untitled retrospective" button with data-cy="value"
+    expect(mockPage.click).toHaveBeenCalledWith('button[data-cy="value"]:has-text("Untitled retrospective")');
+    
+    // Should type custom title with date
+    expect(mockPage.keyboard.press).toHaveBeenCalledWith('Control+A');
+    const today = new Date().toISOString().split('T')[0]; // yyyy-mm-dd format
+    expect(mockPage.keyboard.type).toHaveBeenCalledWith(`Team Retro ${today}`);
+  });
+
+  it('should use both custom format and title when both parameters are provided', async () => {
+    const automation = new RetroAutomation();
+    await automation.openBrowser('madsadglad', 'Team Retro');
+    
+    // Get the mock page instance to verify both format and title
+    const mockBrowser = await mockChromium.launch();
+    const mockPage = await mockBrowser.newPage();
+    
+    // Should click on Mad | Sad | Glad format
+    expect(mockPage.click).toHaveBeenCalledWith('text=Mad | Sad | Glad');
+    
+    // Should type custom title with date
+    const today = new Date().toISOString().split('T')[0]; // yyyy-mm-dd format
+    expect(mockPage.keyboard.type).toHaveBeenCalledWith(`Team Retro ${today}`);
+  });
 });

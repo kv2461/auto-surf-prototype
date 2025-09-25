@@ -5,7 +5,7 @@ export class RetroAutomation {
     // Minimal implementation to pass the test
   }
 
-  async openBrowser(format?: string): Promise<string> {
+  async openBrowser(format?: string, customTitle?: string): Promise<string> {
     try {
       console.log('Attempting to launch browser...');
       const browser = await chromium.launch({ 
@@ -41,7 +41,8 @@ export class RetroAutomation {
       
       // Edit the title to include current date
       const today = new Date().toISOString().split('T')[0]; // yyyy-mm-dd format
-      const newTitle = `Retro ${today}`;
+      const baseTitle = customTitle || 'Retro';
+      const newTitle = `${baseTitle} ${today}`;
       
       // Click on the "Untitled retrospective" button to edit title
       await page.click('button[data-cy="value"]:has-text("Untitled retrospective")');
