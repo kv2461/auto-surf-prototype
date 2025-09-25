@@ -45,6 +45,24 @@ npm test
 - `start-stop-continue`: What to start, stop, and continue
 - `plus-delta`: What went well (+) and what to change (Δ)
 
+## Development Approach
+
+This project follows **strict Test-Driven Development (TDD)**:
+
+1. **Write ONE failing test** - Focus on a single behavior
+2. **Run `npm test`** - Confirm it fails (RED)
+3. **Write minimal code** - Just enough to pass the test
+4. **Run `npm test`** - Confirm it passes (GREEN)
+5. **Refactor if needed** - Improve code while keeping tests green
+6. **Ask for next test** - Get guidance on what to implement next
+
+### Commit Convention
+Using Arlo's Commit Notation v2 with **A** prefix for AI commits:
+- `A F` - AI Feature
+- `A d` - AI Documentation
+- `A R` - AI Refactor
+- `A B` - AI Bug fix
+
 ## Documentation
 
 - [Architecture](./docs/ARCHITECTURE.md) - Technical design and structure
