@@ -59,9 +59,9 @@ export class RetroAutomation {
       console.log('Closing browser...');
       const currentUrl = page.url();
       await browser.close();
-      return `Starting script... Browser launched. Last visited: ${currentUrl}`;
+      return `Successfully generated retrotool: ${currentUrl}`;
     } catch (error) {
-      console.error('Failed to launch browser:', error);
+      console.error('Something unexpected happened:', error);
       throw error;
     }
   }

@@ -10,7 +10,7 @@ describe('CLI', () => {
     expect(output).not.toContain('https://retrotool.io/new-retrospective');
     
     // Should contain success indicators
-    expect(output).toContain('Starting script... Browser launched.');
-    expect(output).toContain('Last visited: https://retrotool.io/');
+    expect(output).toContain('Successfully generated retrotool:');
+    expect(output).toContain('https://retrotool.io/');
   });
 });

@@ -55,7 +55,7 @@ describe('RetroAutomation', () => {
     const automation = new RetroAutomation();
     const result = automation.openBrowser();
     expect(result).toBeInstanceOf(Promise);
-    await expect(result).resolves.toContain('Starting script...');
+    await expect(result).resolves.toContain('Successfully generated retrotool:');
   });
 
   it('should use Playwright chromium.launch when opening browser', async () => {
