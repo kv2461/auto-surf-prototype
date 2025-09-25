@@ -2,7 +2,7 @@ describe('CLI', () => {
   it('should call openBrowser when script is run', async () => {
     const { execSync } = require('child_process');
     const output = execSync('npm run create-retro', { encoding: 'utf-8' });
-    expect(output).toContain('Hello world');
+    expect(output).toContain('Starting script...');
   });
 
   it('should output result from RetroAutomation openBrowser method', async () => {
@@ -13,7 +13,7 @@ describe('CLI', () => {
     // Temporarily modify browser.ts to return different value
     const originalBrowser = fs.readFileSync('src/browser.ts', 'utf-8');
     const modifiedBrowser = originalBrowser.replace(
-      "Promise.resolve('Hello world')", 
+      "Promise.resolve('Starting script...')", 
       "Promise.resolve('From RetroAutomation class')"
     );
     fs.writeFileSync('src/browser.ts', modifiedBrowser);

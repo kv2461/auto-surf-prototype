@@ -10,6 +10,6 @@ describe('RetroAutomation', () => {
     const automation = new RetroAutomation();
     const result = automation.openBrowser();
     expect(result).toBeInstanceOf(Promise);
-    await expect(result).resolves.toBe('Hello world');
+    await expect(result).resolves.toBe('Starting script...');
   });
 });

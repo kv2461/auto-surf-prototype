@@ -4,6 +4,6 @@ export class RetroAutomation {
   }
 
   openBrowser(): Promise<string> {
-    return Promise.resolve('Hello world');
+    return Promise.resolve('Starting script...');
   }
 }
