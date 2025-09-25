@@ -6,7 +6,7 @@ jest.mock('playwright', () => ({
     launch: jest.fn().mockResolvedValue({
       newPage: jest.fn().mockResolvedValue({
         goto: jest.fn().mockResolvedValue(undefined),
-        url: jest.fn().mockReturnValue('https://retrotool.io')
+        url: jest.fn().mockReturnValue('https://retrotool.io/new-retrospective')
       }),
       close: jest.fn().mockResolvedValue(undefined)
     })
@@ -61,19 +61,19 @@ describe('RetroAutomation', () => {
     });
   });
 
-  it('should navigate to retrotool.io after opening browser', async () => {
+  it('should navigate to retrotool.io/new-retrospective after opening browser', async () => {
     const automation = new RetroAutomation();
     await automation.openBrowser();
     
-    // Get the mock page instance to verify goto was called with retrotool.io
+    // Get the mock page instance to verify goto was called with retrotool.io/new-retrospective
     const mockBrowser = await mockChromium.launch();
     const mockPage = await mockBrowser.newPage();
-    expect(mockPage.goto).toHaveBeenCalledWith('https://retrotool.io');
+    expect(mockPage.goto).toHaveBeenCalledWith('https://retrotool.io/new-retrospective');
   });
 
   it('should return the URL of the last website visited before closing', async () => {
     const automation = new RetroAutomation();
     const result = await automation.openBrowser();
-    expect(result).toContain('https://retrotool.io');
+    expect(result).toContain('https://retrotool.io/new-retrospective');
   });
 });
