@@ -1,7 +1,7 @@
 describe('CLI', () => {
   it('should call openBrowser when script is run', async () => {
     const { execSync } = require('child_process');
-    const output = execSync('npm run dev', { encoding: 'utf-8' });
+    const output = execSync('npm run create-retro', { encoding: 'utf-8' });
     expect(output).toContain('Hello world');
   });
 
@@ -20,7 +20,7 @@ describe('CLI', () => {
     
     try {
       const { execSync } = require('child_process');
-      const output = execSync('npm run dev', { encoding: 'utf-8' });
+      const output = execSync('npm run create-retro', { encoding: 'utf-8' });
       expect(output).toContain('From RetroAutomation class');
     } finally {
       // Restore original file
