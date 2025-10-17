@@ -124,6 +124,7 @@ describe('RetroAutomation', () => {
     const now = new Date();
     const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
     expect(mockPage.keyboard.type).toHaveBeenCalledWith(`Retro ${today}`);
+    expect(mockPage.keyboard.type).toHaveBeenCalledWith(`Enter`);
   });
 
   it('should use custom title when title parameter is provided', async () => {
@@ -142,6 +143,7 @@ describe('RetroAutomation', () => {
     const now = new Date();
     const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
     expect(mockPage.keyboard.type).toHaveBeenCalledWith(`Team Retro ${today}`);
+    expect(mockPage.keyboard.type).toHaveBeenCalledWith(`Enter`);
   });
 
   it('should use both custom template and title when both parameters are provided', async () => {

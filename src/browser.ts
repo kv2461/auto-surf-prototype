@@ -53,6 +53,8 @@ export class RetroAutomation {
       await page.keyboard.press('Control+A'); // Select all
       await page.keyboard.type(newTitle);
       console.log(`Set title to: ${newTitle}`);
+      await page.keyboard.press('Enter'); 
+
       
       // Keep browser open for 5 seconds so you can see it
       await new Promise(resolve => setTimeout(resolve, 5000));
