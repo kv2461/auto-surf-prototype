@@ -42,7 +42,7 @@ export class RetroAutomation {
       // Edit the title to include current date
       const now = new Date();
       const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`; // yyyy-mm-dd format in local time
-      const baseTitle = customTitle || 'Acc2 Features Retro';
+      const baseTitle = customTitle || 'Retro';
       const newTitle = `${baseTitle} ${today}`;
       
       // Click on the "Untitled retrospective" button to edit title

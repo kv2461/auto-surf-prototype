@@ -1,12 +1,21 @@
 {
-  "name": "auto-retro",
+  "name": "@kv2461/auto-retro",
   "version": "0.1.0",
-  "description": "Automate retro creation on retrotool.io",
+  "description": "Automate retrospective creation on retrotool.io with custom templates and titles",
   "main": "dist/index.js",
+  "bin": {
+    "retro": "dist/index.js"
+  },
   "type": "module",
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "create-retro": "tsx src/index.ts",
     "build": "tsc",
+    "prepublishOnly": "npm run build",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -15,9 +24,16 @@
     "format": "prettier --write src/**/*.ts",
     "playwright:install": "playwright install"
   },
-  "keywords": ["retro", "automation", "browser", "cli"],
-  "author": "Kevin Vicencio",
+  "author": "Kevin Vicencio <kevinarnoldcode@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kv2461/auto-surf-prototype.git"
+  },
+  "homepage": "https://github.com/kv2461/auto-surf-prototype#readme",
+  "bugs": {
+    "url": "https://github.com/kv2461/auto-surf-prototype/issues"
+  },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
     "@types/jest": "^29.5.5",
