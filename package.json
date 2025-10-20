@@ -1,6 +1,6 @@
 {
   "name": "@kv2461/auto-retro",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Automate retrospective creation on retrotool.io with custom templates and titles",
   "main": "dist/index.js",
   "bin": {
@@ -55,8 +55,12 @@
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node",
-    "roots": ["<rootDir>/src"],
-    "testMatch": ["**/*.spec.ts"],
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "testMatch": [
+      "**/*.spec.ts"
+    ],
     "collectCoverageFrom": [
       "src/**/*.ts",
       "!src/**/*.spec.ts",
