@@ -1,6 +1,6 @@
 {
   "name": "@kv2461/auto-retro",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Automate retrospective creation on retrotool.io with custom templates and titles",
   "main": "dist/index.js",
   "bin": {
