@@ -1,4 +1,4 @@
-import { RetroAutomation } from './browser';
+import { RetroAutomation } from './createRetro';
 
 // Mock Playwright completely to avoid real browser launches
 jest.mock('playwright', () => ({

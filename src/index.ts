@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { RetroAutomation } from './browser.js';
+import { RetroAutomation } from './createRetro.js';
 
 async function main() {
   // Parse command line arguments for template and title
