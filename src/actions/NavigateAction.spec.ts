@@ -1,7 +1,6 @@
 import { Page } from 'playwright';
 import { NavigateAction } from './NavigateAction';
 
-// Mock console.log to capture output
 const mockConsoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
 
 describe('NavigateAction', () => {
