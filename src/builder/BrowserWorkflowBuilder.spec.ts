@@ -197,8 +197,7 @@ describe('BrowserWorkflowBuilder', () => {
       await builder.execute();
       
       expect(mockChromium.launch).toHaveBeenCalledWith({
-        headless: true,
-        slowMo: 1000
+        headless: true
       });
     });
 
@@ -222,8 +221,7 @@ describe('BrowserWorkflowBuilder', () => {
       await builder.execute();
       
       expect(mockChromium.launch).toHaveBeenCalledWith({
-        headless: false,
-        slowMo: 1000
+        headless: false
       });
     });
   });

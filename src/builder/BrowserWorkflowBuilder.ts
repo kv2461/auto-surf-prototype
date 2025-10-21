@@ -8,7 +8,7 @@ import { KeyPressAction } from '../actions/KeyPressAction';
 
 export class BrowserWorkflowBuilder {
   private actions: WebAction[] = [];
-  private launchOptions = { headless: false, slowMo: 1000 };
+  private launchOptions = { headless: false};
   
   navigate(url: string): this {
     this.actions.push(new NavigateAction(url));
