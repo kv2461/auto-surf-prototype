@@ -1,20 +1,9 @@
 import { chromium, Browser, Page } from 'playwright';
 import type { WebAction } from './actions/WebAction';
 import { NavigateAction } from './actions/NavigateAction';
+import { WaitAction } from './actions/WaitAction';
 
 // Action types for the builder pattern
-
-export class WaitAction implements WebAction {
-  constructor(private condition: 'networkidle' | number = 'networkidle') {}
-  
-  async execute(page: Page): Promise<void> {
-    if (typeof this.condition === 'number') {
-      await new Promise(resolve => setTimeout(resolve, this.condition as number));
-    } else {
-      await page.waitForLoadState(this.condition);
-    }
-  }
-}
 
 export class ClickAction implements WebAction {
   constructor(private selector: string, private description?: string) {}
