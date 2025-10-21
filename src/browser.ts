@@ -4,16 +4,7 @@ import { NavigateAction } from './actions/NavigateAction';
 import { WaitAction } from './actions/WaitAction';
 import { ClickAction } from './actions/ClickAction';
 import { TypeAction } from './actions/TypeAction';
-
-// Action types for the builder pattern
-
-export class KeyPressAction implements WebAction {
-  constructor(private key: string) {}
-  
-  async execute(page: Page): Promise<void> {
-    await page.keyboard.press(this.key);
-  }
-}
+import { KeyPressAction } from './actions/KeyPressAction';
 
 // Builder class for constructing browser automation workflows
 export class BrowserWorkflowBuilder {
