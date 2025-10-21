@@ -209,8 +209,8 @@ class InteractiveBrowserBuilder {
     console.log(scriptContent);
     console.log('─'.repeat(50));
     
-    const continueChoice = await this.question('\nWould you like to continue building? (y/n): ');
-    if (continueChoice.toLowerCase().startsWith('y')) {
+    const shouldContinue = await this.askToContinue();
+    if (shouldContinue) {
       await this.showMenu();
     } else {
       this.rl.close();
@@ -276,8 +276,8 @@ runWorkflow().catch(console.error);
       console.error(`🔥 Error: ${error}\n`);
     }
 
-    const continueChoice = await this.question('Would you like to continue building? (y/n): ');
-    if (continueChoice.toLowerCase().startsWith('y')) {
+    const shouldContinue = await this.askToContinue();
+    if (shouldContinue) {
       await this.showMenu();
     } else {
       this.rl.close();
@@ -311,6 +311,22 @@ runWorkflow().catch(console.error);
     return new Promise((resolve) => {
       this.rl.question(prompt, resolve);
     });
+  }
+
+  private async askToContinue(): Promise<boolean> {
+    while (true) {
+      const response = await this.question('Would you like to continue building? (Y/N): ');
+      const normalized = response.trim().toUpperCase();
+      
+      if (normalized === 'Y' || normalized === 'YES') {
+        return true;
+      } else if (normalized === 'N' || normalized === 'NO') {
+        return false;
+      } else {
+        console.log('❌ Please enter Y (yes) or N (no) only.\n');
+        // Loop continues to ask again
+      }
+    }
   }
 }
 
