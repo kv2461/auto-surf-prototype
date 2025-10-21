@@ -29,6 +29,6 @@ export class RetroAutomation {
       .typeText(newTitle, true)
       .pressKey('Enter')
       .wait(5000)
-      .execute();
+      .execute('Successfully generated retrotool');
   }
 }

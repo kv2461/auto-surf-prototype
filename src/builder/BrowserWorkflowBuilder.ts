@@ -55,7 +55,7 @@ export class BrowserWorkflowBuilder {
     return this;
   }
   
-  async execute(): Promise<string> {
+  async execute(successMessage?: string): Promise<string> {
     try {
       console.log('Attempting to launch browser...');
       const browser = await chromium.launch(this.launchOptions);
@@ -71,7 +71,8 @@ export class BrowserWorkflowBuilder {
       await browser.close();
       console.log('Closing browser...');
       
-      return `Successfully generated retrotool: ${currentUrl}`;
+      const message = successMessage || 'Successfully completed browser workflow';
+      return `${message}: ${currentUrl}`;
     } catch (error) {
       console.error('Something unexpected happened:', error);
       throw error;
