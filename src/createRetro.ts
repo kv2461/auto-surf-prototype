@@ -7,18 +7,14 @@ function createDateString(): string {
 
 export class RetroAutomation {
   constructor() {
-    // Minimal implementation to pass the test
   }
 
   async openBrowser(template?: string, customTitle?: string): Promise<string> {
-    // Determine which template to use
     const templateText = template === 'madsadglad' ? 'Mad | Sad | Glad' : 'Liked | Learned | Lacked';
     
-    // Create the title with date
     const baseTitle = customTitle || 'Retro';
     const newTitle = `${baseTitle} ${createDateString()}`;
     
-    // Build and execute the workflow
     return new BrowserWorkflowBuilder()
       .navigate('https://retrotool.io/new-retrospective')
       .waitForLoad()
