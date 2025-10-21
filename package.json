@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "create-retro": "tsx src/index.ts",
-    "interactive": "tsx src/interactive-simple.ts",
+    "interactive": "tsx src/interactive.ts",
     "build": "tsc",
     "prepublishOnly": "npm run build",
     "test": "jest --testPathIgnorePatterns='.*\\.integration\\.spec\\.ts$'",
