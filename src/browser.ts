@@ -1,18 +1,8 @@
 import { chromium, Browser, Page } from 'playwright';
+import type { WebAction } from './actions/WebAction';
+import { NavigateAction } from './actions/NavigateAction';
 
 // Action types for the builder pattern
-export interface WebAction {
-  execute(page: Page): Promise<void>;
-}
-
-export class NavigateAction implements WebAction {
-  constructor(private url: string) {}
-  
-  async execute(page: Page): Promise<void> {
-    await page.goto(this.url);
-    console.log(`Navigated to retrotool website`);
-  }
-}
 
 export class WaitAction implements WebAction {
   constructor(private condition: 'networkidle' | number = 'networkidle') {}
