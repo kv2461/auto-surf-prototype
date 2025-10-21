@@ -63,7 +63,8 @@ describe('RetroAutomation', () => {
     await automation.openBrowser();
     
     expect(mockChromium.launch).toHaveBeenCalledWith({ 
-      headless: false
+      headless: false,
+      slowMo: 500
     });
   });
 

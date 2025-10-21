@@ -16,6 +16,7 @@ export class RetroAutomation {
     const newTitle = `${baseTitle} ${createDateString()}`;
     
     return new BrowserWorkflowBuilder()
+      .setLaunchOptions({ slowMo: 500 })
       .navigate('https://retrotool.io/new-retrospective')
       .waitForLoad()
       .clickText(templateText, `Clicked on ${templateText} option`)
