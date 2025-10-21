@@ -2,31 +2,10 @@ import { chromium, Browser, Page } from 'playwright';
 import type { WebAction } from './actions/WebAction';
 import { NavigateAction } from './actions/NavigateAction';
 import { WaitAction } from './actions/WaitAction';
+import { ClickAction } from './actions/ClickAction';
+import { TypeAction } from './actions/TypeAction';
 
 // Action types for the builder pattern
-
-export class ClickAction implements WebAction {
-  constructor(private selector: string, private description?: string) {}
-  
-  async execute(page: Page): Promise<void> {
-    await page.click(this.selector);
-    if (this.description) {
-      console.log(this.description);
-    }
-  }
-}
-
-export class TypeAction implements WebAction {
-  constructor(private text: string, private selectAll: boolean = false) {}
-  
-  async execute(page: Page): Promise<void> {
-    if (this.selectAll) {
-      await page.keyboard.press('Control+A');
-    }
-    await page.keyboard.type(this.text);
-    console.log(`Typed: ${this.text}`);
-  }
-}
 
 export class KeyPressAction implements WebAction {
   constructor(private key: string) {}
