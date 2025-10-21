@@ -49,30 +49,41 @@ class InteractiveBrowserBuilder {
     console.log('');
 
     console.log('What would you like to do next?');
-    console.log('1. ⏳ Wait for page load');
-    console.log('2. ⏱️  Wait (milliseconds)');
-    console.log('3. 📝 Click text');
-    console.log('4. 🔘 Click button');
-    console.log('5. 🎯 Click element (selector)');
-    console.log('6. ⌨️  Type text');
-    console.log('7. 🔑 Press key');
-    console.log('8. 📄 Generate script');
-    console.log('9. ▶️  Execute workflow');
+    console.log('1. 🌐 Navigate to URL');
+    console.log('2. ⏳ Wait for page load');
+    console.log('3. ⏱️  Wait (milliseconds)');
+    console.log('4. 📝 Click text');
+    console.log('5. 🔘 Click button');
+    console.log('6. 🎯 Click element (selector)');
+    console.log('7. ⌨️  Type text');
+    console.log('8. 🔑 Press key');
+    console.log('9. ↩️  Undo last action');
+    console.log('10. 📄 Generate script');
+    console.log('11. ▶️  Execute workflow');
     console.log('0. 🚪 Exit');
 
-    const choice = await this.question('\nEnter your choice (0-9): ');
+    const choice = await this.question('\nEnter your choice (0-11): ');
     await this.handleChoice(choice.trim());
   }
 
   private async handleChoice(choice: string): Promise<void> {
     switch (choice) {
       case '1':
+        const url = await this.question('🌐 Enter URL to navigate to: ');
+        if (url.trim()) {
+          this.builder.navigate(url.trim());
+          this.steps.push({ type: 'navigate', value: url.trim() });
+          console.log(`✅ Added: Navigate to ${url.trim()}\n`);
+        }
+        break;
+      
+      case '2':
         this.builder.waitForLoad();
         this.steps.push({ type: 'waitForLoad', description: 'Wait for page load' });
         console.log('✅ Added: Wait for page load\n');
         break;
       
-      case '2':
+      case '3':
         const ms = await this.question('⏱️  Enter wait time in milliseconds: ');
         const waitTime = parseInt(ms.trim());
         if (waitTime > 0) {
@@ -82,7 +93,7 @@ class InteractiveBrowserBuilder {
         }
         break;
 
-      case '3':
+      case '4':
         const text = await this.question('📝 Enter text to click: ');
         if (text.trim()) {
           this.builder.clickText(text.trim());
@@ -91,7 +102,7 @@ class InteractiveBrowserBuilder {
         }
         break;
 
-      case '4':
+      case '5':
         const buttonText = await this.question('🔘 Enter button text to click: ');
         if (buttonText.trim()) {
           this.builder.clickButton(buttonText.trim());
@@ -100,7 +111,7 @@ class InteractiveBrowserBuilder {
         }
         break;
 
-      case '5':
+      case '6':
         const selector = await this.question('🎯 Enter CSS selector to click: ');
         if (selector.trim()) {
           this.builder.clickElement(selector.trim());
@@ -109,7 +120,7 @@ class InteractiveBrowserBuilder {
         }
         break;
 
-      case '6':
+      case '7':
         const typeText = await this.question('⌨️  Enter text to type: ');
         if (typeText.trim()) {
           this.builder.typeText(typeText.trim());
@@ -118,7 +129,7 @@ class InteractiveBrowserBuilder {
         }
         break;
 
-      case '7':
+      case '8':
         const key = await this.question('🔑 Enter key to press (e.g., Enter, Tab, Escape): ');
         if (key.trim()) {
           this.builder.pressKey(key.trim());
@@ -127,11 +138,15 @@ class InteractiveBrowserBuilder {
         }
         break;
 
-      case '8':
+      case '9':
+        await this.undoLastAction();
+        break;
+
+      case '10':
         await this.generateScript();
         break;
 
-      case '9':
+      case '11':
         await this.executeWorkflow();
         break;
 
@@ -145,8 +160,31 @@ class InteractiveBrowserBuilder {
         break;
     }
 
-    if (choice !== '0' && choice !== '8' && choice !== '9') {
+    if (choice !== '0' && choice !== '10' && choice !== '11') {
       await this.showMenu();
+    }
+  }
+
+  private async undoLastAction(): Promise<void> {
+    if (this.steps.length === 0) {
+      console.log('❌ No actions to undo.\n');
+      return;
+    }
+
+    const lastStep = this.steps.pop();
+    const undoneAction = this.builder.undo();
+    
+    if (lastStep && undoneAction) {
+      console.log(`↩️  Undone: ${this.formatStep(lastStep)}`);
+      
+      // Special handling for undoing the initial navigation
+      if (lastStep.type === 'navigate' && this.steps.length === 0) {
+        console.log('⚠️  Warning: You have undone the initial navigation. You may want to add a new navigation step.\n');
+      } else {
+        console.log('');
+      }
+    } else {
+      console.log('❌ Failed to undo last action.\n');
     }
   }
 

@@ -55,6 +55,10 @@ export class BrowserWorkflowBuilder {
     return this;
   }
   
+  undo(): WebAction | null {
+    return this.actions.pop() || null;
+  }
+  
   async execute(successMessage?: string): Promise<string> {
     try {
       console.log('Attempting to launch browser...');
